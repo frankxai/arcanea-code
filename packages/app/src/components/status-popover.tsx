@@ -1,21 +1,21 @@
-import { createEffect, createMemo, createSignal, For, onCleanup, Show, type Accessor, type JSXElement } from "solid-js"
-import { createStore, reconcile } from "solid-js/store"
-import { useNavigate } from "@solidjs/router"
-import { useDialog } from "@opencode-ai/ui/context/dialog"
-import { Popover } from "@opencode-ai/ui/popover"
-import { Tabs } from "@opencode-ai/ui/tabs"
 import { Button } from "@opencode-ai/ui/button"
-import { Switch } from "@opencode-ai/ui/switch"
+import { useDialog } from "@opencode-ai/ui/context/dialog"
 import { Icon } from "@opencode-ai/ui/icon"
+import { Popover } from "@opencode-ai/ui/popover"
+import { Switch } from "@opencode-ai/ui/switch"
+import { Tabs } from "@opencode-ai/ui/tabs"
 import { showToast } from "@opencode-ai/ui/toast"
-import { useSync } from "@/context/sync"
+import { useNavigate } from "@solidjs/router"
+import { type Accessor, createEffect, createMemo, createSignal, For, type JSXElement, onCleanup, Show } from "solid-js"
+import { createStore, reconcile } from "solid-js/store"
+import { ServerRow } from "@/components/server/server-row"
+import { useLanguage } from "@/context/language"
+import { usePlatform } from "@/context/platform"
 import { useSDK } from "@/context/sdk"
 import { normalizeServerUrl, useServer } from "@/context/server"
-import { usePlatform } from "@/context/platform"
-import { useLanguage } from "@/context/language"
-import { DialogSelectServer } from "./dialog-select-server"
-import { ServerRow } from "@/components/server/server-row"
+import { useSync } from "@/context/sync"
 import { checkServerHealth, type ServerHealth } from "@/utils/server-health"
+import { DialogSelectServer } from "./dialog-select-server"
 
 const pollMs = 10_000
 
@@ -64,7 +64,7 @@ const useServerHealth = (servers: Accessor<string[]>, fetcher: typeof fetch) => 
       const results: Record<string, ServerHealth> = {}
       await Promise.all(
         list.map(async (url) => {
-          results[url] = await checkServerHealth(url, fetcher)
+          results[url] = await checkServerHealth({ url }, fetcher)
         }),
       )
       if (dead) return
@@ -166,8 +166,8 @@ export function StatusPopover() {
     const current = server.url
     const list = server.list
     if (!current) return list
-    if (!list.includes(current)) return [current, ...list]
-    return [current, ...list.filter((item) => item !== current)]
+    // if (!list.includes(current)) return [current, ...list]
+    return [current /* ...list.filter((item) => item !== current) */]
   })
   const health = useServerHealth(servers, fetcher)
   const sortedServers = createMemo(() => listServersByHealth(servers(), server.url, health))

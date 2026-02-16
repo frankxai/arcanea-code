@@ -1,7 +1,8 @@
-import { createOpencodeClient, type Event } from "@opencode-ai/sdk/v2/client"
+import type { Event } from "@opencode-ai/sdk/v2/client"
 import { createSimpleContext } from "@opencode-ai/ui/context"
 import { createGlobalEmitter } from "@solid-primitives/event-bus"
 import { batch, onCleanup } from "solid-js"
+import { createSdkForServer } from "@/utils/server"
 import { usePlatform } from "./platform"
 import { useServer } from "./server"
 
@@ -11,16 +12,6 @@ export const { use: useGlobalSDK, provider: GlobalSDKProvider } = createSimpleCo
     const server = useServer()
     const platform = usePlatform()
     const abort = new AbortController()
-
-    const password = typeof window === "undefined" ? undefined : window.__OPENCODE__?.serverPassword
-
-    const auth = (() => {
-      if (!password) return
-      if (!server.isLocal()) return
-      return {
-        Authorization: `Basic ${btoa(`opencode:${password}`)}`,
-      }
-    })()
 
     const eventFetch = (() => {
       if (!platform.fetch) return
@@ -33,11 +24,10 @@ export const { use: useGlobalSDK, provider: GlobalSDKProvider } = createSimpleCo
       }
     })()
 
-    const eventSdk = createOpencodeClient({
-      baseUrl: server.url,
+    const eventSdk = createSdkForServer({
       signal: abort.signal,
       fetch: eventFetch,
-      headers: eventFetch ? undefined : auth,
+      server: server.current.http,
     })
     const emitter = createGlobalEmitter<{
       [key: string]: Event
@@ -150,12 +140,23 @@ export const { use: useGlobalSDK, provider: GlobalSDKProvider } = createSimpleCo
       flush()
     })
 
-    const sdk = createOpencodeClient({
-      baseUrl: server.url,
+    const sdk = createSdkForServer({
+      server: server.current.http,
       fetch: platform.fetch,
       throwOnError: true,
     })
 
-    return { url: server.url, client: sdk, event: emitter }
+    return {
+      url: server.url,
+      client: sdk,
+      event: emitter,
+      createClient(opts: Omit<Parameters<typeof createSdkForServer>[0], "server" | "fetch">) {
+        return createSdkForServer({
+          server: server.current.http,
+          fetch: platform.fetch,
+          ...opts,
+        })
+      },
+    }
   },
 })
