@@ -12,7 +12,7 @@ import { ServerRow } from "@/components/server/server-row"
 import { useLanguage } from "@/context/language"
 import { usePlatform } from "@/context/platform"
 import { useSDK } from "@/context/sdk"
-import { normalizeServerUrl, useServer } from "@/context/server"
+import { normalizeServerUrl, type ServerConnection, useServer } from "@/context/server"
 import { useSync } from "@/context/sync"
 import { checkServerHealth, type ServerHealth } from "@/utils/server-health"
 import { DialogSelectServer } from "./dialog-select-server"
@@ -32,7 +32,7 @@ const pluginEmptyMessage = (value: string, file: string): JSXElement => {
 }
 
 const listServersByHealth = (
-  list: string[],
+  list: ServerConnection.Any[],
   active: string | undefined,
   status: Record<string, ServerHealth | undefined>,
 ) => {
@@ -45,15 +45,15 @@ const listServersByHealth = (
   }
 
   return list.slice().sort((a, b) => {
-    if (a === active) return -1
-    if (b === active) return 1
-    const diff = rank(status[a]) - rank(status[b])
+    if (a.http.url === active) return -1
+    if (b.http.url === active) return 1
+    const diff = rank(status[a.http.url]) - rank(status[b.http.url])
     if (diff !== 0) return diff
     return (order.get(a) ?? 0) - (order.get(b) ?? 0)
   })
 }
 
-const useServerHealth = (servers: Accessor<string[]>, fetcher: typeof fetch) => {
+const useServerHealth = (servers: Accessor<ServerConnection.Any[]>, fetcher: typeof fetch) => {
   const [status, setStatus] = createStore({} as Record<string, ServerHealth | undefined>)
 
   createEffect(() => {
@@ -63,8 +63,8 @@ const useServerHealth = (servers: Accessor<string[]>, fetcher: typeof fetch) => 
     const refresh = async () => {
       const results: Record<string, ServerHealth> = {}
       await Promise.all(
-        list.map(async (url) => {
-          results[url] = await checkServerHealth({ url }, fetcher)
+        list.map(async ({ http }) => {
+          results[http.url] = await checkServerHealth(http, fetcher)
         }),
       )
       if (dead) return
@@ -163,11 +163,11 @@ export function StatusPopover() {
 
   const fetcher = platform.fetch ?? globalThis.fetch
   const servers = createMemo(() => {
-    const current = server.url
+    const current = server.current
     const list = server.list
     if (!current) return list
-    // if (!list.includes(current)) return [current, ...list]
-    return [current /* ...list.filter((item) => item !== current) */]
+    if (!list.includes(current)) return [current, ...list]
+    return [current, ...list.filter((item) => item !== current)]
   })
   const health = useServerHealth(servers, fetcher)
   const sortedServers = createMemo(() => listServersByHealth(servers(), server.url, health))
@@ -249,8 +249,8 @@ export function StatusPopover() {
             <div class="flex flex-col px-2 pb-2">
               <div class="flex flex-col p-3 bg-background-base rounded-sm min-h-14">
                 <For each={sortedServers()}>
-                  {(url) => {
-                    const isBlocked = () => health[url]?.healthy === false
+                  {(s) => {
+                    const isBlocked = () => health[s.http.url]?.healthy === false
                     return (
                       <button
                         type="button"
@@ -262,19 +262,19 @@ export function StatusPopover() {
                         aria-disabled={isBlocked()}
                         onClick={() => {
                           if (isBlocked()) return
-                          server.setActive(url)
+                          server.setActive(s.http.url)
                           navigate("/")
                         }}
                       >
                         <ServerRow
-                          url={url}
-                          status={health[url]}
+                          url={s.http.url}
+                          status={health[s.http.url]}
                           dimmed={isBlocked()}
                           class="flex items-center gap-2 w-full min-w-0"
                           nameClass="text-14-regular text-text-base truncate"
                           versionClass="text-12-regular text-text-weak truncate"
                           badge={
-                            <Show when={url === defaultServer.url()}>
+                            <Show when={s.http.url === defaultServer.url()}>
                               <span class="text-11-regular text-text-base bg-surface-base px-1.5 py-0.5 rounded-md">
                                 {language.t("common.default")}
                               </span>
@@ -282,7 +282,7 @@ export function StatusPopover() {
                           }
                         >
                           <div class="flex-1" />
-                          <Show when={url === server.url}>
+                          <Show when={s.http.url === server.url}>
                             <Icon name="check" size="small" class="text-icon-weak shrink-0" />
                           </Show>
                         </ServerRow>
