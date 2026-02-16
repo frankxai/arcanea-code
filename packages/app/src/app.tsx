@@ -60,7 +60,6 @@ declare global {
   interface Window {
     __OPENCODE__?: {
       updaterEnabled?: boolean
-      serverPassword?: string
       deepLinks?: string[]
       wsl?: boolean
     }
