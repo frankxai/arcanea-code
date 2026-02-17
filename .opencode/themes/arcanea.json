@@ -1,0 +1,231 @@
+{
+  "$schema": "https://opencode.ai/theme.json",
+  "defs": {
+    "void": "#0b0e14",
+    "deep": "#0f1319",
+    "surface": "#151a22",
+    "raised": "#1a2030",
+    "elevated": "#232d3f",
+    "overlay": "#2c3850",
+    "teal": "#7fffd4",
+    "tealDim": "#4db89a",
+    "tealMuted": "#2d7a65",
+    "gold": "#ffd700",
+    "goldDim": "#b89b00",
+    "fire": "#ff6b35",
+    "water": "#78a6ff",
+    "earth": "#4ade80",
+    "wind": "#e2e8f0",
+    "violet": "#9966ff",
+    "crystal": "#a5f3fc",
+    "error": "#ef4444",
+    "warning": "#f59e0b",
+    "success": "#22c55e",
+    "textPrimary": "#e2e8f0",
+    "textMuted": "#64748b",
+    "borderDim": "#1e293b",
+    "borderActive": "#334155"
+  },
+  "theme": {
+    "primary": {
+      "dark": "teal",
+      "light": "tealMuted"
+    },
+    "secondary": {
+      "dark": "violet",
+      "light": "violet"
+    },
+    "accent": {
+      "dark": "gold",
+      "light": "goldDim"
+    },
+    "error": {
+      "dark": "error",
+      "light": "error"
+    },
+    "warning": {
+      "dark": "warning",
+      "light": "warning"
+    },
+    "success": {
+      "dark": "success",
+      "light": "success"
+    },
+    "info": {
+      "dark": "crystal",
+      "light": "water"
+    },
+    "text": {
+      "dark": "textPrimary",
+      "light": "void"
+    },
+    "textMuted": {
+      "dark": "textMuted",
+      "light": "elevated"
+    },
+    "background": {
+      "dark": "void",
+      "light": "wind"
+    },
+    "backgroundPanel": {
+      "dark": "deep",
+      "light": "textPrimary"
+    },
+    "backgroundElement": {
+      "dark": "surface",
+      "light": "crystal"
+    },
+    "border": {
+      "dark": "borderDim",
+      "light": "overlay"
+    },
+    "borderActive": {
+      "dark": "borderActive",
+      "light": "elevated"
+    },
+    "borderSubtle": {
+      "dark": "borderDim",
+      "light": "overlay"
+    },
+    "diffAdded": {
+      "dark": "earth",
+      "light": "earth"
+    },
+    "diffRemoved": {
+      "dark": "error",
+      "light": "error"
+    },
+    "diffContext": {
+      "dark": "textMuted",
+      "light": "textMuted"
+    },
+    "diffHunkHeader": {
+      "dark": "textMuted",
+      "light": "textMuted"
+    },
+    "diffHighlightAdded": {
+      "dark": "earth",
+      "light": "earth"
+    },
+    "diffHighlightRemoved": {
+      "dark": "error",
+      "light": "error"
+    },
+    "diffAddedBg": {
+      "dark": "surface",
+      "light": "textPrimary"
+    },
+    "diffRemovedBg": {
+      "dark": "surface",
+      "light": "textPrimary"
+    },
+    "diffContextBg": {
+      "dark": "deep",
+      "light": "wind"
+    },
+    "diffLineNumber": {
+      "dark": "elevated",
+      "light": "overlay"
+    },
+    "diffAddedLineNumberBg": {
+      "dark": "surface",
+      "light": "textPrimary"
+    },
+    "diffRemovedLineNumberBg": {
+      "dark": "surface",
+      "light": "textPrimary"
+    },
+    "markdownText": {
+      "dark": "textPrimary",
+      "light": "void"
+    },
+    "markdownHeading": {
+      "dark": "teal",
+      "light": "tealMuted"
+    },
+    "markdownLink": {
+      "dark": "water",
+      "light": "water"
+    },
+    "markdownLinkText": {
+      "dark": "crystal",
+      "light": "tealMuted"
+    },
+    "markdownCode": {
+      "dark": "gold",
+      "light": "goldDim"
+    },
+    "markdownBlockQuote": {
+      "dark": "textMuted",
+      "light": "textMuted"
+    },
+    "markdownEmph": {
+      "dark": "violet",
+      "light": "violet"
+    },
+    "markdownStrong": {
+      "dark": "gold",
+      "light": "goldDim"
+    },
+    "markdownHorizontalRule": {
+      "dark": "borderDim",
+      "light": "overlay"
+    },
+    "markdownListItem": {
+      "dark": "teal",
+      "light": "tealMuted"
+    },
+    "markdownListEnumeration": {
+      "dark": "tealDim",
+      "light": "tealMuted"
+    },
+    "markdownImage": {
+      "dark": "violet",
+      "light": "violet"
+    },
+    "markdownImageText": {
+      "dark": "crystal",
+      "light": "tealMuted"
+    },
+    "markdownCodeBlock": {
+      "dark": "textPrimary",
+      "light": "void"
+    },
+    "syntaxComment": {
+      "dark": "textMuted",
+      "light": "textMuted"
+    },
+    "syntaxKeyword": {
+      "dark": "violet",
+      "light": "violet"
+    },
+    "syntaxFunction": {
+      "dark": "teal",
+      "light": "tealMuted"
+    },
+    "syntaxVariable": {
+      "dark": "crystal",
+      "light": "tealMuted"
+    },
+    "syntaxString": {
+      "dark": "earth",
+      "light": "earth"
+    },
+    "syntaxNumber": {
+      "dark": "gold",
+      "light": "goldDim"
+    },
+    "syntaxType": {
+      "dark": "tealDim",
+      "light": "tealMuted"
+    },
+    "syntaxOperator": {
+      "dark": "violet",
+      "light": "violet"
+    },
+    "syntaxPunctuation": {
+      "dark": "textPrimary",
+      "light": "void"
+    }
+  }
+}
