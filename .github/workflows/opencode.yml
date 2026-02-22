@@ -26,9 +26,9 @@ jobs:
       - uses: ./.github/actions/setup-bun
 
       - name: Run opencode
-        uses: anomalyco/opencode/github@latest
+        uses: frankxai/arcanea-realm/github@latest
         env:
-          OPENCODE_API_KEY: ${{ secrets.OPENCODE_API_KEY }}
+          ARCANEA_API_KEY: ${{ secrets.ARCANEA_API_KEY }}
           OPENCODE_PERMISSION: '{"bash": "deny"}'
         with:
           model: opencode/claude-opus-4-5

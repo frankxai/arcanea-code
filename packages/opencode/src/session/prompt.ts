@@ -42,6 +42,7 @@ import { Tool } from "@/tool/tool"
 import { PermissionNext } from "@/permission/next"
 import { SessionStatus } from "./status"
 import { LLM } from "./llm"
+import { Council } from "./council"
 import { iife } from "@/util/iife"
 import { Shell } from "@/shell/shell"
 import { Truncate } from "@/tool/truncation"
@@ -1800,6 +1801,21 @@ NOTE: At any point in time through this workflow you should feel free to ask the
       template = template.replace(bashRegex, () => results[index++])
     }
     template = template.trim()
+
+    // Guardian Council: multi-model parallel orchestration
+    if (input.command === "council") {
+      const challenge = input.arguments.trim() || template.replace(/!input/gi, "").trim()
+      if (challenge) {
+        const fallbackModel = input.model
+          ? Provider.parseModel(input.model)
+          : await lastModel(input.sessionID)
+        const councilResult = await Council.convene({
+          challenge,
+          fallbackModel,
+        })
+        template = Council.format(councilResult)
+      }
+    }
 
     const taskModel = await (async () => {
       if (command.model) {

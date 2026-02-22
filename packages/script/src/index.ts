@@ -17,30 +17,35 @@ if (!semver.satisfies(process.versions.bun, expectedBunVersionRange)) {
 }
 
 const env = {
-  OPENCODE_CHANNEL: process.env["OPENCODE_CHANNEL"],
-  OPENCODE_BUMP: process.env["OPENCODE_BUMP"],
-  OPENCODE_VERSION: process.env["OPENCODE_VERSION"],
-  OPENCODE_RELEASE: process.env["OPENCODE_RELEASE"],
+  ARCANEA_CHANNEL: process.env["ARCANEA_CHANNEL"] || process.env["OPENCODE_CHANNEL"],
+  ARCANEA_BUMP: process.env["ARCANEA_BUMP"] || process.env["OPENCODE_BUMP"],
+  ARCANEA_VERSION: process.env["ARCANEA_VERSION"] || process.env["OPENCODE_VERSION"],
+  ARCANEA_RELEASE: process.env["ARCANEA_RELEASE"] || process.env["OPENCODE_RELEASE"],
 }
 const CHANNEL = await (async () => {
-  if (env.OPENCODE_CHANNEL) return env.OPENCODE_CHANNEL
-  if (env.OPENCODE_BUMP) return "latest"
-  if (env.OPENCODE_VERSION && !env.OPENCODE_VERSION.startsWith("0.0.0-")) return "latest"
+  if (env.ARCANEA_CHANNEL) return env.ARCANEA_CHANNEL
+  if (env.ARCANEA_BUMP) return "latest"
+  if (env.ARCANEA_VERSION && !env.ARCANEA_VERSION.startsWith("0.0.0-")) return "latest"
   return await $`git branch --show-current`.text().then((x) => x.trim())
 })()
 const IS_PREVIEW = CHANNEL !== "latest"
 
 const VERSION = await (async () => {
-  if (env.OPENCODE_VERSION) return env.OPENCODE_VERSION
+  if (env.ARCANEA_VERSION) return env.ARCANEA_VERSION
   if (IS_PREVIEW) return `0.0.0-${CHANNEL}-${new Date().toISOString().slice(0, 16).replace(/[-:T]/g, "")}`
-  const version = await fetch("https://registry.npmjs.org/opencode-ai/latest")
+  // Try arcanea-realm first, fall back to opencode-ai for version history
+  const version = await fetch("https://registry.npmjs.org/arcanea-realm/latest")
+    .then((res) => {
+      if (!res.ok) return fetch("https://registry.npmjs.org/opencode-ai/latest")
+      return res
+    })
     .then((res) => {
       if (!res.ok) throw new Error(res.statusText)
       return res.json()
     })
     .then((data: any) => data.version)
   const [major, minor, patch] = version.split(".").map((x: string) => Number(x) || 0)
-  const t = env.OPENCODE_BUMP?.toLowerCase()
+  const t = env.ARCANEA_BUMP?.toLowerCase()
   if (t === "major") return `${major + 1}.0.0`
   if (t === "minor") return `${major}.${minor + 1}.0`
   return `${major}.${minor}.${patch + 1}`
@@ -48,16 +53,8 @@ const VERSION = await (async () => {
 
 const team = [
   "actions-user",
-  "opencode",
-  "rekram1-node",
-  "thdxr",
-  "kommander",
-  "jayair",
-  "fwang",
-  "adamdotdevin",
-  "iamdavidhill",
-  "opencode-agent[bot]",
-  "R44VC0RP",
+  "frankxai",
+  "arcanea-agent[bot]",
 ]
 
 export const Script = {
@@ -71,10 +68,10 @@ export const Script = {
     return IS_PREVIEW
   },
   get release(): boolean {
-    return !!env.OPENCODE_RELEASE
+    return !!env.ARCANEA_RELEASE
   },
   get team() {
     return team
   },
 }
-console.log(`opencode script`, JSON.stringify(Script, null, 2))
+console.log(`arcanea-realm script`, JSON.stringify(Script, null, 2))

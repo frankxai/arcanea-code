@@ -23,7 +23,7 @@ jobs:
 
       - name: Check duplicates and compliance
         env:
-          OPENCODE_API_KEY: ${{ secrets.OPENCODE_API_KEY }}
+          ARCANEA_API_KEY: ${{ secrets.ARCANEA_API_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           OPENCODE_PERMISSION: |
             {
