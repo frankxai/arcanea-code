@@ -507,16 +507,16 @@ export namespace ACP {
       log.info("initialize", { protocolVersion: params.protocolVersion })
 
       const authMethod: AuthMethod = {
-        description: "Run `opencode auth login` in the terminal",
-        name: "Login with opencode",
-        id: "opencode-login",
+        description: "Run `arcanea-realm auth login` in the terminal",
+        name: "Login with arcanea-realm",
+        id: "arcanea-login",
       }
 
       // If client supports terminal-auth capability, use that instead.
       if (params.clientCapabilities?._meta?.["terminal-auth"] === true) {
         authMethod._meta = {
           "terminal-auth": {
-            command: "opencode",
+            command: "arcanea-realm",
             args: ["auth", "login"],
             label: "OpenCode Login",
           },

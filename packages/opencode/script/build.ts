@@ -14,7 +14,7 @@ process.chdir(dir)
 
 import pkg from "../package.json"
 import { Script } from "@opencode-ai/script"
-const modelsUrl = process.env.OPENCODE_MODELS_URL || "https://models.dev"
+const modelsUrl = process.env.ARCANEA_MODELS_URL || "https://models.dev"
 // Fetch and generate models.dev snapshot
 const modelsData = process.env.MODELS_DEV_API_JSON
   ? await Bun.file(process.env.MODELS_DEV_API_JSON).text()
@@ -175,8 +175,8 @@ for (const item of targets) {
       autoloadTsconfig: true,
       autoloadPackageJson: true,
       target: name.replace(pkg.name, "bun") as any,
-      outfile: `dist/${name}/bin/opencode`,
-      execArgv: [`--user-agent=opencode/${Script.version}`, "--use-system-ca", "--"],
+      outfile: `dist/${name}/bin/arcanea-realm`,
+      execArgv: [`--user-agent=arcanea-realm/${Script.version}`, "--use-system-ca", "--"],
       windows: {},
     },
     entrypoints: ["./src/index.ts", parserWorker, workerPath],

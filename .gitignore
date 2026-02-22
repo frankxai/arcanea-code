@@ -17,7 +17,8 @@ ts-dist
 /result
 refs
 Session.vim
-opencode.json
+# User-local config overrides (the committed arcanea.json is tracked)
+arcanea-local.json
 a.out
 target
 .scripts

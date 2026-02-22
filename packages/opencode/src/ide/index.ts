@@ -45,14 +45,14 @@ export namespace Ide {
   }
 
   export function alreadyInstalled() {
-    return process.env["OPENCODE_CALLER"] === "vscode" || process.env["OPENCODE_CALLER"] === "vscode-insiders"
+    return process.env["ARCANEA_CALLER"] === "vscode" || process.env["ARCANEA_CALLER"] === "vscode-insiders"
   }
 
   export async function install(ide: (typeof SUPPORTED_IDES)[number]["name"]) {
     const cmd = SUPPORTED_IDES.find((i) => i.name === ide)?.cmd
     if (!cmd) throw new Error(`Unknown IDE: ${ide}`)
 
-    const p = spawn([cmd, "--install-extension", "sst-dev.opencode"], {
+    const p = spawn([cmd, "--install-extension", "frankxai.arcanea-realm"], {
       stdout: "pipe",
       stderr: "pipe",
     })

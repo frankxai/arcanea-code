@@ -19,8 +19,8 @@
     "db": "bun drizzle-kit"
   },
   "bin": {
-    "arcanea-realm": "./bin/opencode",
-    "realm": "./bin/opencode"
+    "arcanea-realm": "./bin/arcanea-realm",
+    "realm": "./bin/arcanea-realm"
   },
   "randomField": "this-is-a-random-value-12345",
   "exports": {

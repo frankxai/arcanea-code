@@ -81,9 +81,9 @@ export namespace Server {
           // Allow CORS preflight requests to succeed without auth.
           // Browser clients sending Authorization headers will preflight with OPTIONS.
           if (c.req.method === "OPTIONS") return next()
-          const password = Flag.OPENCODE_SERVER_PASSWORD
+          const password = Flag.ARCANEA_SERVER_PASSWORD
           if (!password) return next()
-          const username = Flag.OPENCODE_SERVER_USERNAME ?? "opencode"
+          const username = Flag.ARCANEA_SERVER_USERNAME ?? "arcanea"
           return basicAuth({ username, password })(c, next)
         })
         .use(async (c, next) => {
@@ -194,7 +194,7 @@ export namespace Server {
         )
         .use(async (c, next) => {
           if (c.req.path === "/log") return next()
-          const raw = c.req.query("directory") || c.req.header("x-opencode-directory") || process.cwd()
+          const raw = c.req.query("directory") || c.req.header("x-arcanea-directory") || process.cwd()
           const directory = (() => {
             try {
               return decodeURIComponent(raw)
@@ -215,9 +215,9 @@ export namespace Server {
           openAPIRouteHandler(app, {
             documentation: {
               info: {
-                title: "opencode",
+                title: "arcanea-realm",
                 version: "0.0.3",
-                description: "opencode api",
+                description: "arcanea-realm api",
               },
               openapi: "3.1.1",
             },
@@ -561,9 +561,9 @@ export namespace Server {
     const result = await generateSpecs(App() as Hono, {
       documentation: {
         info: {
-          title: "opencode",
+          title: "arcanea-realm",
           version: "1.0.0",
-          description: "opencode api",
+          description: "arcanea-realm api",
         },
         openapi: "3.1.1",
       },

@@ -212,14 +212,14 @@ export namespace LLM {
       headers: {
         ...(input.model.providerID.startsWith("opencode")
           ? {
-              "x-opencode-project": Instance.project.id,
-              "x-opencode-session": input.sessionID,
-              "x-opencode-request": input.user.id,
-              "x-opencode-client": Flag.OPENCODE_CLIENT,
+              "x-arcanea-project": Instance.project.id,
+              "x-arcanea-session": input.sessionID,
+              "x-arcanea-request": input.user.id,
+              "x-arcanea-client": Flag.ARCANEA_CLIENT,
             }
           : input.model.providerID !== "anthropic"
             ? {
-                "User-Agent": `opencode/${Installation.VERSION}`,
+                "User-Agent": `arcanea-realm/${Installation.VERSION}`,
               }
             : undefined),
         ...input.model.headers,
