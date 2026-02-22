@@ -31,7 +31,7 @@ function getNetworkIPs() {
 export const WebCommand = cmd({
   command: "web",
   builder: (yargs) => withNetworkOptions(yargs),
-  describe: "start arcanea-realm server and open web interface",
+  describe: "start arcanea-code server and open web interface",
   handler: async (args) => {
     if (!Flag.ARCANEA_SERVER_PASSWORD) {
       UI.println(UI.Style.TEXT_WARNING_BOLD + "!  " + "ARCANEA_SERVER_PASSWORD is not set; server is unsecured.")

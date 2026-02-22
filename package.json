@@ -1,6 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
-  "name": "arcanea-realm",
+  "name": "arcanea-code",
   "description": "Guardian-routed AI creation companion — the Arcanea intelligence layer",
   "private": true,
   "type": "module",

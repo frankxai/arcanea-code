@@ -25,7 +25,7 @@ export const NotFoundError = NamedError.create(
 const log = Log.create({ service: "db" })
 
 export namespace Database {
-  export const Path = path.join(Global.Path.data, "arcanea-realm.db")
+  export const Path = path.join(Global.Path.data, "arcanea-code.db")
   type Schema = typeof schema
   export type Transaction = SQLiteTransaction<"sync", void, Schema>
 
@@ -66,9 +66,9 @@ export namespace Database {
   }
 
   export const Client = lazy(() => {
-    log.info("opening database", { path: path.join(Global.Path.data, "arcanea-realm.db") })
+    log.info("opening database", { path: path.join(Global.Path.data, "arcanea-code.db") })
 
-    const sqlite = new BunDatabase(path.join(Global.Path.data, "arcanea-realm.db"), { create: true })
+    const sqlite = new BunDatabase(path.join(Global.Path.data, "arcanea-code.db"), { create: true })
 
     sqlite.run("PRAGMA journal_mode = WAL")
     sqlite.run("PRAGMA synchronous = NORMAL")

@@ -43,11 +43,11 @@ export namespace Config {
   function getManagedConfigDir(): string {
     switch (process.platform) {
       case "darwin":
-        return "/Library/Application Support/arcanea-realm"
+        return "/Library/Application Support/arcanea-code"
       case "win32":
         return path.join(process.env.ProgramData || "C:\\ProgramData", "opencode")
       default:
-        return "/etc/arcanea-realm"
+        return "/etc/arcanea-code"
     }
   }
 
@@ -1010,7 +1010,7 @@ export namespace Config {
       keybinds: Keybinds.optional().describe("Custom keybind configurations"),
       logLevel: Log.Level.optional().describe("Log level"),
       tui: TUI.optional().describe("TUI specific settings"),
-      server: Server.optional().describe("Server configuration for arcanea-realm serve and web commands"),
+      server: Server.optional().describe("Server configuration for arcanea-code serve and web commands"),
       command: z
         .record(z.string(), Command)
         .optional()

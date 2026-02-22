@@ -219,7 +219,7 @@ export namespace LLM {
             }
           : input.model.providerID !== "anthropic"
             ? {
-                "User-Agent": `arcanea-realm/${Installation.VERSION}`,
+                "User-Agent": `arcanea-code/${Installation.VERSION}`,
               }
             : undefined),
         ...input.model.headers,

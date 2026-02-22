@@ -81,15 +81,15 @@ export namespace Installation {
       },
       {
         name: "brew" as const,
-        command: () => $`brew list --formula arcanea-realm`.throws(false).quiet().text(),
+        command: () => $`brew list --formula arcanea-code`.throws(false).quiet().text(),
       },
       {
         name: "scoop" as const,
-        command: () => $`scoop list arcanea-realm`.throws(false).quiet().text(),
+        command: () => $`scoop list arcanea-code`.throws(false).quiet().text(),
       },
       {
         name: "choco" as const,
-        command: () => $`choco list --limit-output arcanea-realm`.throws(false).quiet().text(),
+        command: () => $`choco list --limit-output arcanea-code`.throws(false).quiet().text(),
       },
     ]
 
@@ -121,11 +121,11 @@ export namespace Installation {
   )
 
   async function getBrewFormula() {
-    const tapFormula = await $`brew list --formula frankxai/tap/arcanea-realm`.throws(false).quiet().text()
-    if (tapFormula.includes("arcanea-realm")) return "frankxai/tap/arcanea-realm"
-    const coreFormula = await $`brew list --formula arcanea-realm`.throws(false).quiet().text()
-    if (coreFormula.includes("arcanea-realm")) return "arcanea-realm"
-    return "arcanea-realm"
+    const tapFormula = await $`brew list --formula frankxai/tap/arcanea-code`.throws(false).quiet().text()
+    if (tapFormula.includes("arcanea-code")) return "frankxai/tap/arcanea-code"
+    const coreFormula = await $`brew list --formula arcanea-code`.throws(false).quiet().text()
+    if (coreFormula.includes("arcanea-code")) return "arcanea-code"
+    return "arcanea-code"
   }
 
   export async function upgrade(method: Method, target: string) {
@@ -138,13 +138,13 @@ export namespace Installation {
         })
         break
       case "npm":
-        cmd = $`npm install -g arcanea-realm@${target}`
+        cmd = $`npm install -g arcanea-code@${target}`
         break
       case "pnpm":
-        cmd = $`pnpm install -g arcanea-realm@${target}`
+        cmd = $`pnpm install -g arcanea-code@${target}`
         break
       case "bun":
-        cmd = $`bun install -g arcanea-realm@${target}`
+        cmd = $`bun install -g arcanea-code@${target}`
         break
       case "brew": {
         const formula = await getBrewFormula()
@@ -165,10 +165,10 @@ export namespace Installation {
         break
       }
       case "choco":
-        cmd = $`echo Y | choco upgrade arcanea-realm --version=${target}`
+        cmd = $`echo Y | choco upgrade arcanea-code --version=${target}`
         break
       case "scoop":
-        cmd = $`scoop install arcanea-realm@${target}`
+        cmd = $`scoop install arcanea-code@${target}`
         break
       default:
         throw new Error(`Unknown method: ${method}`)
@@ -191,7 +191,7 @@ export namespace Installation {
 
   export const VERSION = typeof ARCANEA_VERSION === "string" ? ARCANEA_VERSION : "local"
   export const CHANNEL = typeof ARCANEA_CHANNEL === "string" ? ARCANEA_CHANNEL : "local"
-  export const USER_AGENT = `arcanea-realm/${CHANNEL}/${VERSION}/${Flag.ARCANEA_CLIENT}`
+  export const USER_AGENT = `arcanea-code/${CHANNEL}/${VERSION}/${Flag.ARCANEA_CLIENT}`
 
   export async function latest(installMethod?: Method) {
     const detectedMethod = installMethod || (await method())
@@ -220,7 +220,7 @@ export namespace Installation {
         return reg.endsWith("/") ? reg.slice(0, -1) : reg
       })
       const channel = CHANNEL
-      return fetch(`${registry}/arcanea-realm/${channel}`)
+      return fetch(`${registry}/arcanea-code/${channel}`)
         .then((res) => {
           if (!res.ok) throw new Error(res.statusText)
           return res.json()
@@ -230,7 +230,7 @@ export namespace Installation {
 
     if (detectedMethod === "choco") {
       return fetch(
-        "https://community.chocolatey.org/api/v2/Packages?$filter=Id%20eq%20%27arcanea-realm%27%20and%20IsLatestVersion&$select=Version",
+        "https://community.chocolatey.org/api/v2/Packages?$filter=Id%20eq%20%27arcanea-code%27%20and%20IsLatestVersion&$select=Version",
         { headers: { Accept: "application/json;odata=verbose" } },
       )
         .then((res) => {
@@ -251,7 +251,7 @@ export namespace Installation {
         .then((data: any) => data.version)
     }
 
-    return fetch("https://api.github.com/repos/frankxai/arcanea-realm/releases/latest")
+    return fetch("https://api.github.com/repos/frankxai/arcanea-code/releases/latest")
       .then((res) => {
         if (!res.ok) throw new Error(res.statusText)
         return res.json()

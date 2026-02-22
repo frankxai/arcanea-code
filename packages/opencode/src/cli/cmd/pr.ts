@@ -5,7 +5,7 @@ import { $ } from "bun"
 
 export const PrCommand = cmd({
   command: "pr <number>",
-  describe: "fetch and checkout a GitHub PR branch, then run arcanea-realm",
+  describe: "fetch and checkout a GitHub PR branch, then run arcanea-code",
   builder: (yargs) =>
     yargs.positional("number", {
       type: "number",
@@ -63,15 +63,15 @@ export const PrCommand = cmd({
               await $`git branch --set-upstream-to=${remoteName}/${headRefName} ${localBranchName}`.nothrow()
             }
 
-            // Check for arcanea-realm session link in PR body
+            // Check for arcanea-code session link in PR body
             if (prInfo && prInfo.body) {
               const sessionMatch = prInfo.body.match(/https:\/\/opncd\.ai\/s\/([a-zA-Z0-9_-]+)/)
               if (sessionMatch) {
                 const sessionUrl = sessionMatch[0]
-                UI.println(`Found arcanea-realm session: ${sessionUrl}`)
+                UI.println(`Found arcanea-code session: ${sessionUrl}`)
                 UI.println(`Importing session...`)
 
-                const importResult = await $`arcanea-realm import ${sessionUrl}`.nothrow()
+                const importResult = await $`arcanea-code import ${sessionUrl}`.nothrow()
                 if (importResult.exitCode === 0) {
                   const importOutput = importResult.text().trim()
                   // Extract session ID from the output (format: "Imported session: <session-id>")
@@ -88,10 +88,10 @@ export const PrCommand = cmd({
 
         UI.println(`Successfully checked out PR #${prNumber} as branch '${localBranchName}'`)
         UI.println()
-        UI.println("Starting arcanea-realm...")
+        UI.println("Starting arcanea-code...")
         UI.println()
 
-        // Launch arcanea-realm TUI with session ID if available
+        // Launch arcanea-code TUI with session ID if available
         const { spawn } = await import("child_process")
         const realmArgs = sessionId ? ["-s", sessionId] : []
         const realmProcess = spawn("opencode", realmArgs, {
@@ -102,7 +102,7 @@ export const PrCommand = cmd({
         await new Promise<void>((resolve, reject) => {
           realmProcess.on("exit", (code) => {
             if (code === 0) resolve()
-            else reject(new Error(`arcanea-realm exited with code ${code}`))
+            else reject(new Error(`arcanea-code exited with code ${code}`))
           })
           realmProcess.on("error", reject)
         })

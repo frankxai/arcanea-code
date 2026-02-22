@@ -33,8 +33,8 @@ const IS_PREVIEW = CHANNEL !== "latest"
 const VERSION = await (async () => {
   if (env.ARCANEA_VERSION) return env.ARCANEA_VERSION
   if (IS_PREVIEW) return `0.0.0-${CHANNEL}-${new Date().toISOString().slice(0, 16).replace(/[-:T]/g, "")}`
-  // Try arcanea-realm first, fall back to opencode-ai for version history
-  const version = await fetch("https://registry.npmjs.org/arcanea-realm/latest")
+  // Try arcanea-code first, fall back to opencode-ai for version history
+  const version = await fetch("https://registry.npmjs.org/arcanea-code/latest")
     .then((res) => {
       if (!res.ok) return fetch("https://registry.npmjs.org/opencode-ai/latest")
       return res
@@ -74,4 +74,4 @@ export const Script = {
     return team
   },
 }
-console.log(`arcanea-realm script`, JSON.stringify(Script, null, 2))
+console.log(`arcanea-code script`, JSON.stringify(Script, null, 2))

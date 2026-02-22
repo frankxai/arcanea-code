@@ -133,7 +133,7 @@ type IssueQueryResponse = {
 
 const AGENT_USERNAME = "arcanea-agent[bot]"
 const AGENT_REACTION = "eyes"
-const WORKFLOW_FILE = ".github/workflows/arcanea-realm.yml"
+const WORKFLOW_FILE = ".github/workflows/arcanea-code.yml"
 
 // Event categories for routing
 // USER_EVENTS: triggered by user actions, have actor/issueId, support reactions/comments
@@ -362,7 +362,7 @@ export const GithubInstallCommand = cmd({
 
             await Bun.write(
               path.join(app.root, WORKFLOW_FILE),
-              `name: arcanea-realm
+              `name: arcanea-code
 
 on:
   issue_comment:
@@ -389,8 +389,8 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Run arcanea-realm
-        uses: frankxai/arcanea-realm/github@latest${envStr}
+      - name: Run arcanea-code
+        uses: frankxai/arcanea-code/github@latest${envStr}
         with:
           model: ${provider}/${model}`,
             )
@@ -507,7 +507,7 @@ export const GithubRunCommand = cmd({
           await addReaction(commentType)
         }
 
-        // Setup arcanea-realm session
+        // Setup arcanea-code session
         const repoData = await fetchRepo()
         session = await Session.create({
           permission: [
@@ -525,7 +525,7 @@ export const GithubRunCommand = cmd({
           await Session.share(session.id)
           return session.id.slice(-8)
         })()
-        console.log("arcanea-realm session", session.id)
+        console.log("arcanea-code session", session.id)
 
         // Handle event types:
         // REPO_EVENTS (schedule, workflow_dispatch): no issue/PR context, output to logs/PR only
@@ -870,7 +870,7 @@ export const GithubRunCommand = cmd({
       }
 
       async function chat(message: string, files: PromptFiles = []) {
-        console.log("Sending message to arcanea-realm...")
+        console.log("Sending message to arcanea-code...")
 
         const result = await SessionPrompt.prompt({
           sessionID: session.id,
@@ -1298,7 +1298,7 @@ Co-authored-by: ${actor} <${actor}@users.noreply.github.com>"`
 
           return `<a href="${shareBaseUrl}/s/${shareId}"><img width="200" alt="${titleAlt}" src="https://social-cards.sst.dev/arcanea-share/${title64}.png?model=${providerID}/${modelID}&version=${session.version}&id=${shareId}" /></a>\n`
         })()
-        const shareUrl = shareId ? `[arcanea-realm session](${shareBaseUrl}/s/${shareId})&nbsp;&nbsp;|&nbsp;&nbsp;` : ""
+        const shareUrl = shareId ? `[arcanea-code session](${shareBaseUrl}/s/${shareId})&nbsp;&nbsp;|&nbsp;&nbsp;` : ""
         return `\n\n${image}${shareUrl}[github run](${runUrl})`
       }
 
@@ -1359,7 +1359,7 @@ query($owner: String!, $repo: String!, $number: Int!) {
         return [
           "<github_action_context>",
           "You are running as a GitHub Action. Important:",
-          "- Git push and PR creation are handled AUTOMATICALLY by the arcanea-realm infrastructure after your response",
+          "- Git push and PR creation are handled AUTOMATICALLY by the arcanea-code infrastructure after your response",
           "- Do NOT include warnings or disclaimers about GitHub tokens, workflow permissions, or PR creation capabilities",
           "- Do NOT suggest manual steps for creating PRs or pushing code - this happens automatically",
           "- Focus only on the code changes and your analysis/response",
@@ -1497,7 +1497,7 @@ query($owner: String!, $repo: String!, $number: Int!) {
         return [
           "<github_action_context>",
           "You are running as a GitHub Action. Important:",
-          "- Git push and PR creation are handled AUTOMATICALLY by the arcanea-realm infrastructure after your response",
+          "- Git push and PR creation are handled AUTOMATICALLY by the arcanea-code infrastructure after your response",
           "- Do NOT include warnings or disclaimers about GitHub tokens, workflow permissions, or PR creation capabilities",
           "- Do NOT suggest manual steps for creating PRs or pushing code - this happens automatically",
           "- Focus only on the code changes and your analysis/response",

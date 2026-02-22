@@ -1,12 +1,12 @@
 #!/bin/sh
 # Arcanea Realm - AI CLI for creators
 # Install: curl -fsSL https://arcanea.ai/install | sh
-# Or: curl -fsSL https://raw.githubusercontent.com/frankxai/arcanea-realm/dev/install.sh | sh
+# Or: curl -fsSL https://raw.githubusercontent.com/frankxai/arcanea-code/dev/install.sh | sh
 
 set -e
 
-REPO="frankxai/arcanea-realm"
-BINARY_NAME="arcanea-realm"
+REPO="frankxai/arcanea-code"
+BINARY_NAME="arcanea-code"
 
 # Detect platform
 OS=$(uname -s | tr '[:upper:]' '[:lower:]')
@@ -21,7 +21,7 @@ esac
 case "$OS" in
   linux) PLATFORM="linux" ;;
   darwin) PLATFORM="darwin" ;;
-  *) echo "Unsupported OS: $OS. For Windows, use: npm install -g arcanea-realm"; exit 1 ;;
+  *) echo "Unsupported OS: $OS. For Windows, use: npm install -g arcanea-code"; exit 1 ;;
 esac
 
 # Detect musl vs glibc on Linux
@@ -41,10 +41,10 @@ LATEST=$(curl -fsSL "https://api.github.com/repos/${REPO}/releases/latest" 2>/de
 if [ -z "$LATEST" ]; then
   echo "Could not detect latest release. Installing from npm instead..."
   if command -v npm >/dev/null 2>&1; then
-    npm install -g arcanea-realm
+    npm install -g arcanea-code
     exit 0
   elif command -v bun >/dev/null 2>&1; then
-    bun install -g arcanea-realm
+    bun install -g arcanea-code
     exit 0
   else
     echo "Error: No package manager found. Install npm or bun first."

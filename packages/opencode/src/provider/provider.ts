@@ -361,7 +361,7 @@ export namespace Provider {
         options: {
           headers: {
             "HTTP-Referer": "https://opencode.ai/",
-            "X-Title": "arcanea-realm",
+            "X-Title": "arcanea-code",
           },
         },
       }
@@ -372,7 +372,7 @@ export namespace Provider {
         options: {
           headers: {
             "http-referer": "https://opencode.ai/",
-            "x-title": "arcanea-realm",
+            "x-title": "arcanea-code",
           },
         },
       }
@@ -460,7 +460,7 @@ export namespace Provider {
         options: {
           headers: {
             "HTTP-Referer": "https://opencode.ai/",
-            "X-Title": "arcanea-realm",
+            "X-Title": "arcanea-code",
           },
         },
       }
@@ -479,7 +479,7 @@ export namespace Provider {
       const providerConfig = config.provider?.["gitlab"]
 
       const aiGatewayHeaders = {
-        "User-Agent": `arcanea-realm/${Installation.VERSION} gitlab-ai-provider/${GITLAB_PROVIDER_VERSION} (${os.platform()} ${os.release()}; ${os.arch()})`,
+        "User-Agent": `arcanea-code/${Installation.VERSION} gitlab-ai-provider/${GITLAB_PROVIDER_VERSION} (${os.platform()} ${os.release()}; ${os.arch()})`,
         ...(providerConfig?.options?.aiGatewayHeaders || {}),
       }
 
@@ -548,7 +548,7 @@ export namespace Provider {
       if (!apiToken) {
         throw new Error(
           "CLOUDFLARE_API_TOKEN (or CF_AIG_TOKEN) is required for Cloudflare AI Gateway. " +
-            "Set it via environment variable or run `arcanea-realm auth cloudflare-ai-gateway`.",
+            "Set it via environment variable or run `arcanea-code auth cloudflare-ai-gateway`.",
         )
       }
 
@@ -573,7 +573,7 @@ export namespace Provider {
         autoload: false,
         options: {
           headers: {
-            "X-Cerebras-3rd-Party-Integration": "arcanea-realm",
+            "X-Cerebras-3rd-Party-Integration": "arcanea-code",
           },
         },
       }

@@ -214,7 +214,7 @@ function normalizePath(input?: string) {
 
 export const RunCommand = cmd({
   command: "run [message..]",
-  describe: "run arcanea-realm with a message",
+  describe: "run arcanea-code with a message",
   builder: (yargs: Argv) => {
     return yargs
       .positional("message", {
@@ -272,7 +272,7 @@ export const RunCommand = cmd({
       })
       .option("attach", {
         type: "string",
-        describe: "attach to a running arcanea-realm server (e.g., http://localhost:4096)",
+        describe: "attach to a running arcanea-code server (e.g., http://localhost:4096)",
       })
       .option("dir", {
         type: "string",

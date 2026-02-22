@@ -5,7 +5,7 @@ import { win32DisableProcessedInput, win32InstallCtrlCGuard } from "./win32"
 
 export const AttachCommand = cmd({
   command: "attach <url>",
-  describe: "attach to a running arcanea-realm server",
+  describe: "attach to a running arcanea-code server",
   builder: (yargs) =>
     yargs
       .positional("url", {

@@ -46,7 +46,7 @@ process.on("uncaughtException", (e) => {
 
 const cli = yargs(hideBin(process.argv))
   .parserConfiguration({ "populate--": true })
-  .scriptName("arcanea-realm")
+  .scriptName("arcanea-code")
   .wrap(100)
   .help("help", "show help")
   .alias("help", "h")
@@ -75,12 +75,12 @@ const cli = yargs(hideBin(process.argv))
     process.env.AGENT = "1"
     process.env.ARCANEA = "1"
 
-    Log.Default.info("arcanea-realm", {
+    Log.Default.info("arcanea-code", {
       version: Installation.VERSION,
       args: process.argv.slice(2),
     })
 
-    const marker = path.join(Global.Path.data, "arcanea-realm.db")
+    const marker = path.join(Global.Path.data, "arcanea-code.db")
     if (!(await Bun.file(marker).exists())) {
       const tty = process.stderr.isTTY
       process.stderr.write("Performing one time database migration, may take a few minutes..." + EOL)

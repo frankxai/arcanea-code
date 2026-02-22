@@ -33,7 +33,7 @@ permissions:
 jobs:
   version:
     runs-on: blacksmith-4vcpu-ubuntu-2404
-    if: github.repository == 'frankxai/arcanea-realm'
+    if: github.repository == 'frankxai/arcanea-code'
     steps:
       - uses: actions/checkout@v3
         with:
@@ -43,7 +43,7 @@ jobs:
 
       - name: Install Arcanea Realm
         if: inputs.bump || inputs.version
-        run: bun i -g arcanea-realm
+        run: bun i -g arcanea-code
 
       - id: version
         run: |
@@ -61,7 +61,7 @@ jobs:
   build-cli:
     needs: version
     runs-on: blacksmith-4vcpu-ubuntu-2404
-    if: github.repository == 'frankxai/arcanea-realm'
+    if: github.repository == 'frankxai/arcanea-code'
     steps:
       - uses: actions/checkout@v3
         with:
@@ -80,7 +80,7 @@ jobs:
 
       - uses: actions/upload-artifact@v4
         with:
-          name: arcanea-realm-cli
+          name: arcanea-code-cli
           path: packages/opencode/dist
 
     outputs:
@@ -242,7 +242,7 @@ jobs:
 
       - uses: actions/download-artifact@v4
         with:
-          name: arcanea-realm-cli
+          name: arcanea-code-cli
           path: packages/opencode/dist
 
       - name: Cache apt packages (AUR)

@@ -28,8 +28,8 @@ Arcanea Realm is a **full AI creation CLI** forked from OpenCode, enhanced with 
 ## Install
 
 ```bash
-npm install -g arcanea-realm
-arcanea-realm
+npm install -g arcanea-code
+arcanea-code
 ```
 
 ## Guardian Agents

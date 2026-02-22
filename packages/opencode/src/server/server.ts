@@ -215,9 +215,9 @@ export namespace Server {
           openAPIRouteHandler(app, {
             documentation: {
               info: {
-                title: "arcanea-realm",
+                title: "arcanea-code",
                 version: "0.0.3",
-                description: "arcanea-realm api",
+                description: "arcanea-code api",
               },
               openapi: "3.1.1",
             },
@@ -561,9 +561,9 @@ export namespace Server {
     const result = await generateSpecs(App() as Hono, {
       documentation: {
         info: {
-          title: "arcanea-realm",
+          title: "arcanea-code",
           version: "1.0.0",
-          description: "arcanea-realm api",
+          description: "arcanea-code api",
         },
         openapi: "3.1.1",
       },

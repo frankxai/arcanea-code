@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
   "version": "1.2.6",
-  "name": "arcanea-realm",
+  "name": "arcanea-code",
   "type": "module",
   "license": "MIT",
   "private": true,
@@ -19,8 +19,8 @@
     "db": "bun drizzle-kit"
   },
   "bin": {
-    "arcanea-realm": "./bin/arcanea-realm",
-    "realm": "./bin/arcanea-realm"
+    "arcanea-code": "./bin/arcanea-code",
+    "arc": "./bin/arcanea-code"
   },
   "randomField": "this-is-a-random-value-12345",
   "exports": {

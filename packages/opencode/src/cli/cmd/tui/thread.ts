@@ -43,12 +43,12 @@ function createEventSource(client: RpcClient): EventSource {
 
 export const TuiThreadCommand = cmd({
   command: "$0 [project]",
-  describe: "start arcanea-realm tui",
+  describe: "start arcanea-code tui",
   builder: (yargs) =>
     withNetworkOptions(yargs)
       .positional("project", {
         type: "string",
-        describe: "path to start arcanea-realm in",
+        describe: "path to start arcanea-code in",
       })
       .option("model", {
         type: "string",

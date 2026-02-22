@@ -507,8 +507,8 @@ export namespace ACP {
       log.info("initialize", { protocolVersion: params.protocolVersion })
 
       const authMethod: AuthMethod = {
-        description: "Run `arcanea-realm auth login` in the terminal",
-        name: "Login with arcanea-realm",
+        description: "Run `arcanea-code auth login` in the terminal",
+        name: "Login with arcanea-code",
         id: "arcanea-login",
       }
 
@@ -516,7 +516,7 @@ export namespace ACP {
       if (params.clientCapabilities?._meta?.["terminal-auth"] === true) {
         authMethod._meta = {
           "terminal-auth": {
-            command: "arcanea-realm",
+            command: "arcanea-code",
             args: ["auth", "login"],
             label: "OpenCode Login",
           },

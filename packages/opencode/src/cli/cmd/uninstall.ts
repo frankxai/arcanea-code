@@ -23,7 +23,7 @@ interface RemovalTargets {
 
 export const UninstallCommand = {
   command: "uninstall",
-  describe: "uninstall arcanea-realm and remove all related files",
+  describe: "uninstall arcanea-code and remove all related files",
   builder: (yargs: Argv) =>
     yargs
       .option("keep-config", {
@@ -128,13 +128,13 @@ async function showRemovalSummary(targets: RemovalTargets, method: Installation.
 
   if (method !== "curl" && method !== "unknown") {
     const cmds: Record<string, string> = {
-      npm: "npm uninstall -g arcanea-realm",
-      pnpm: "pnpm uninstall -g arcanea-realm",
-      bun: "bun remove -g arcanea-realm",
-      yarn: "yarn global remove arcanea-realm",
-      brew: "brew uninstall arcanea-realm",
-      choco: "choco uninstall arcanea-realm",
-      scoop: "scoop uninstall arcanea-realm",
+      npm: "npm uninstall -g arcanea-code",
+      pnpm: "pnpm uninstall -g arcanea-code",
+      bun: "bun remove -g arcanea-code",
+      yarn: "yarn global remove arcanea-code",
+      brew: "brew uninstall arcanea-code",
+      choco: "choco uninstall arcanea-code",
+      scoop: "scoop uninstall arcanea-code",
     }
     prompts.log.info(`  ✓ Package: ${cmds[method] || method}`)
   }
@@ -179,10 +179,10 @@ async function executeUninstall(method: Installation.Method, targets: RemovalTar
 
   if (method !== "curl" && method !== "unknown") {
     const cmds: Record<string, string[]> = {
-      npm: ["npm", "uninstall", "-g", "arcanea-realm"],
-      pnpm: ["pnpm", "uninstall", "-g", "arcanea-realm"],
-      bun: ["bun", "remove", "-g", "arcanea-realm"],
-      yarn: ["yarn", "global", "remove", "arcanea-realm"],
+      npm: ["npm", "uninstall", "-g", "arcanea-code"],
+      pnpm: ["pnpm", "uninstall", "-g", "arcanea-code"],
+      bun: ["bun", "remove", "-g", "arcanea-code"],
+      yarn: ["yarn", "global", "remove", "arcanea-code"],
       brew: ["brew", "uninstall", "opencode"],
       choco: ["choco", "uninstall", "opencode"],
       scoop: ["scoop", "uninstall", "opencode"],
@@ -193,7 +193,7 @@ async function executeUninstall(method: Installation.Method, targets: RemovalTar
       spinner.start(`Running ${cmd.join(" ")}...`)
       const result =
         method === "choco"
-          ? await $`echo Y | choco uninstall arcanea-realm -y -r`.quiet().nothrow()
+          ? await $`echo Y | choco uninstall arcanea-code -y -r`.quiet().nothrow()
           : await $`${cmd}`.quiet().nothrow()
       if (result.exitCode !== 0) {
         spinner.stop(`Package manager uninstall failed: exit code ${result.exitCode}`, 1)
@@ -270,7 +270,7 @@ async function getShellConfigFile(): Promise<string | null> {
     const content = await Bun.file(file)
       .text()
       .catch(() => "")
-    if (content.includes("# arcanea-realm") || content.includes(".arcanea/bin")) {
+    if (content.includes("# arcanea-code") || content.includes(".arcanea/bin")) {
       return file
     }
   }
@@ -288,7 +288,7 @@ async function cleanShellConfig(file: string) {
   for (const line of lines) {
     const trimmed = line.trim()
 
-    if (trimmed === "# arcanea-realm") {
+    if (trimmed === "# arcanea-code") {
       skip = true
       continue
     }

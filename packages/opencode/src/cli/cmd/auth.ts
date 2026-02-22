@@ -219,7 +219,7 @@ export const AuthLoginCommand = cmd({
   describe: "log in to a provider",
   builder: (yargs) =>
     yargs.positional("url", {
-      describe: "arcanea-realm auth provider",
+      describe: "arcanea-code auth provider",
       type: "string",
     }),
   async handler(args) {
