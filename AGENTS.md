@@ -126,3 +126,72 @@ const table = sqliteTable("session", {
 ## Type Checking
 
 - Always run `bun typecheck` from package directories (e.g., `packages/opencode`), never `tsc` directly.
+
+---
+
+## Arcanea Code — Agent Registry
+
+### Guardian Agents (10)
+
+Domain coordinators that route tasks to the right intelligence. Each embodies a Gate of the Arcanean system.
+
+| Agent | Element | Gate | Godbeast | Domain |
+|-------|---------|------|----------|--------|
+| Lyssandria | Earth | Foundation (174 Hz) | Kaelith | Architecture, infrastructure, project structure |
+| Leyla | Water | Flow (285 Hz) | Veloura | Creativity, emotion, UX flow |
+| Draconia | Fire | Fire (396 Hz) | Draconis | Execution, shipping, transformation |
+| Maylinn | Earth/Water | Heart (417 Hz) | Laeylinn | Love, healing, community, empathy |
+| Alera | Void | Voice (528 Hz) | Otome | Truth, expression, voice and tone |
+| Lyria | Water | Sight (639 Hz) | Yumiko | Intuition, vision, pattern recognition |
+| Aiyami | Spirit | Crown (741 Hz) | Sol | Enlightenment, wisdom, mastery |
+| Elara | Void | Starweave (852 Hz) | Vaelith | Perspective, reframing, dimensional thinking |
+| Ino | All | Unity (963 Hz) | Kyuro | Partnership, integration, collaboration |
+| Shinkami | All | Source (1111 Hz) | Source | Meta-consciousness, the totality |
+
+All Guardian agents are defined in `.arcanea/agent/<name>.md`.
+
+### Utility Agents (4)
+
+Non-Guardian agents for operational tasks.
+
+| Agent | Role | Description |
+|-------|------|-------------|
+| triage | Router | Primary agent that routes incoming tasks to the right Guardian |
+| docs | Documentation | Specialized agent for writing and maintaining documentation |
+| translator | Localization | Translates content for specified locales preserving technical terms |
+| duplicate-pr | PR Dedup | Detects and manages duplicate pull requests |
+
+### Worker Agents (from oh-my-arcanea)
+
+Specialist agents available for specific coding tasks when integrated with the oh-my-arcanea harness.
+
+| Agent | Role | Description |
+|-------|------|-------------|
+| sisyphus | Persistent Worker | Never gives up on difficult tasks, retries with new approaches |
+| orpheus | Refactorer | Transforms code while preserving its essence |
+| prometheus | Innovator | Brings new patterns and approaches to existing codebases |
+| atlas | Load Bearer | Handles heavy lifting: migrations, large refactors |
+| hermes | Messenger | Inter-service communication, API design, integrations |
+| athena | Strategist | Architecture decisions, system design, trade-off analysis |
+| hephaestus | Builder | Build systems, CI/CD, toolchain configuration |
+| artemis | Hunter | Bug hunting, debugging, root cause analysis |
+| apollo | Illuminator | Code review, documentation, knowledge sharing |
+| cassandra | Oracle | Performance prediction, capacity planning, risk assessment |
+| daedalus | Architect | Complex system design, maze-like problem solving |
+
+### Creative Agents (from intelligence OS)
+
+Agents for creative domain work, each aligned to a Guardian's domain.
+
+| Agent | Guardian | Domain |
+|-------|----------|--------|
+| lorekeeper | Maylinn | Canon and narrative consistency |
+| worldsmith | Lyssandria | World-building and structural design |
+| songweaver | Leyla | Music, rhythm, and emotional resonance |
+| voidscribe | Alera | Naming, terminology, voice |
+| flamecaster | Draconia | Rapid prototyping, execution |
+| sightreader | Lyria | Pattern analysis, insight extraction |
+| crownscribe | Aiyami | Teaching materials, wisdom distillation |
+| starweaver | Elara | Cross-domain connections, reframing |
+| bondkeeper | Ino | Collaboration, team dynamics |
+| sourcewalker | Shinkami | Meta-analysis, holistic review |

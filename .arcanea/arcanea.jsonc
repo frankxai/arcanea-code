@@ -1,18 +1,50 @@
 {
   "$schema": "https://opencode.ai/config.json",
+  // Arcanea Code — Guardian-Powered AI Coding CLI
+  // Built on OpenCode. Enhanced with living intelligence.
+
+  "theme": "arcanea",
+
+  // Guardian agent definitions: .arcanea/agent/*.md
+  // Skills: .arcanea/skill/*/SKILL.md
+  // Commands: .arcanea/command/*.md
+
   "provider": {
     "opencode": {
-      "options": {},
-    },
+      "options": {}
+    }
   },
+
   "permission": {
+    // Allow common dev tools
+    "allow": [
+      "Bash(npm *)",
+      "Bash(bun *)",
+      "Bash(git *)",
+      "Bash(npx *)",
+      "Bash(ls *)",
+      "Bash(cat *)",
+      "Bash(grep *)",
+      "Read",
+      "Write",
+      "Edit"
+    ],
     "edit": {
-      "packages/opencode/migration/*": "deny",
-    },
+      "packages/opencode/migration/*": "deny"
+    }
   },
+
   "mcp": {},
+
   "tools": {
     "github-triage": false,
-    "github-pr-search": false,
+    "github-pr-search": false
   },
+
+  "instructions": [
+    "You are Arcanea Code — a Guardian-powered AI coding CLI.",
+    "The Ten Guardians route each task to the right intelligence.",
+    "When making decisions, consider which Guardian's domain applies.",
+    "Always aim for quality that would honor the Source Gate."
+  ]
 }
