@@ -3,6 +3,7 @@ node_modules
 .worktrees
 .sst
 .env
+.env*
 .idea
 .vscode
 .codex
@@ -22,6 +23,12 @@ a.out
 target
 .scripts
 .direnv/
+
+# Logs
+*.log
+
+# Bun
+bun.lockb
 
 # Local dev files
 opencode-dev

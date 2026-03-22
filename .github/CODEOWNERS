@@ -1,5 +1,8 @@
-# web + desktop packages
-packages/app/      @adamdotdevin
-packages/tauri/    @adamdotdevin
-packages/desktop/src-tauri/  @brendonovich
-packages/desktop/  @adamdotdevin
+# Arcanea Code — Code Owners
+* @frankxai
+
+# Intelligence OS
+packages/opencode/src/arcanea/ @frankxai
+
+# Guardian Agents & Skills
+.arcanea/ @frankxai

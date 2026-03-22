@@ -151,6 +151,17 @@
     "zod": "catalog:",
     "zod-to-json-schema": "3.24.5"
   },
+  "homepage": "https://arcanea.ai",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/frankxai/arcanea-code.git",
+    "directory": "packages/opencode"
+  },
+  "bugs": {
+    "url": "https://github.com/frankxai/arcanea-code/issues"
+  },
+  "author": "FrankX <frank@arcanea.ai>",
+  "keywords": ["ai", "coding-agent", "cli", "guardian", "arcanea", "opencode", "typescript"],
   "overrides": {
     "drizzle-orm": "catalog:"
   }

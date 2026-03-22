@@ -89,10 +89,16 @@
     "@opencode-ai/sdk": "workspace:*",
     "typescript": "catalog:"
   },
+  "homepage": "https://arcanea.ai",
   "repository": {
     "type": "git",
-    "url": "https://github.com/anomalyco/opencode"
+    "url": "https://github.com/frankxai/arcanea-code.git"
   },
+  "bugs": {
+    "url": "https://github.com/frankxai/arcanea-code/issues"
+  },
+  "author": "FrankX <frank@arcanea.ai>",
+  "keywords": ["ai", "coding-agent", "cli", "guardian", "arcanea", "opencode", "typescript"],
   "license": "MIT",
   "prettier": {
     "semi": false,
