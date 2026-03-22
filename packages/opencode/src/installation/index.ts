@@ -126,11 +126,11 @@ export namespace Installation {
         )
 
         const getBrewFormula = Effect.fnUntraced(function* () {
-          const tapFormula = yield* text(["brew", "list", "--formula", "anomalyco/tap/opencode"])
-          if (tapFormula.includes("opencode")) return "anomalyco/tap/opencode"
-          const coreFormula = yield* text(["brew", "list", "--formula", "opencode"])
-          if (coreFormula.includes("opencode")) return "opencode"
-          return "opencode"
+          const tapFormula = yield* text(["brew", "list", "--formula", "anomalyco/tap/arcanea-code"])
+          if (tapFormula.includes("arcanea-code")) return "anomalyco/tap/arcanea-code"
+          const coreFormula = yield* text(["brew", "list", "--formula", "arcanea-code"])
+          if (coreFormula.includes("arcanea-code")) return "arcanea-code"
+          return "arcanea-code"
         })
 
         const upgradeCurl = Effect.fnUntraced(
@@ -165,9 +165,9 @@ export namespace Installation {
             { name: "yarn", command: () => text(["yarn", "global", "list"]) },
             { name: "pnpm", command: () => text(["pnpm", "list", "-g", "--depth=0"]) },
             { name: "bun", command: () => text(["bun", "pm", "ls", "-g"]) },
-            { name: "brew", command: () => text(["brew", "list", "--formula", "opencode"]) },
-            { name: "scoop", command: () => text(["scoop", "list", "opencode"]) },
-            { name: "choco", command: () => text(["choco", "list", "--limit-output", "opencode"]) },
+            { name: "brew", command: () => text(["brew", "list", "--formula", "arcanea-code"]) },
+            { name: "scoop", command: () => text(["scoop", "list", "arcanea-code"]) },
+            { name: "choco", command: () => text(["choco", "list", "--limit-output", "arcanea-code"]) },
           ]
 
           checks.sort((a, b) => {
@@ -181,7 +181,7 @@ export namespace Installation {
           for (const check of checks) {
             const output = yield* check.command()
             const installedName =
-              check.name === "brew" || check.name === "choco" || check.name === "scoop" ? "opencode" : "opencode-ai"
+              check.name === "brew" || check.name === "choco" || check.name === "scoop" ? "arcanea-code" : "opencode-ai"
             if (output.includes(installedName)) {
               return check.name
             }
@@ -288,7 +288,7 @@ export namespace Installation {
               break
             }
             case "choco":
-              result = yield* run(["choco", "upgrade", "opencode", `--version=${target}`, "-y"])
+              result = yield* run(["choco", "upgrade", "arcanea-code", `--version=${target}`, "-y"])
               break
             case "scoop":
               result = yield* run(["scoop", "install", `opencode@${target}`])
