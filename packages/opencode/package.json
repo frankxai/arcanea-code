@@ -4,7 +4,7 @@
   "name": "arcanea-code",
   "type": "module",
   "license": "MIT",
-  "private": true,
+  "private": false,
   "scripts": {
     "prepare": "effect-language-service patch || true",
     "typecheck": "tsgo --noEmit",
@@ -20,9 +20,16 @@
     "db": "bun drizzle-kit"
   },
   "bin": {
-    "arcanea-code": "./bin/arcanea-code",
-    "opencode": "./bin/arcanea-code"
+    "arcanea-code": "./bin/npx-entry.js",
+    "opencode": "./bin/npx-entry.js"
   },
+  "files": [
+    "bin/",
+    "dist/",
+    "src/",
+    "migration/",
+    ".arcanea/"
+  ],
   "randomField": "this-is-a-random-value-12345",
   "exports": {
     "./*": "./src/*.ts"
