@@ -81,3 +81,19 @@ export type { SwarmRole, CreativeAgent } from './agents';
 // System prompt builder
 export { buildSystemPrompt, buildUtilityPrompt } from './prompt-builder';
 export type { PromptOptions } from './prompt-builder';
+
+// Runtime integration (session prompt injection + per-message routing)
+export { getIntelligenceContext, routeMessage } from './runtime';
+
+// Worktree isolation for parallel Guardian sessions
+export {
+  createWorktree,
+  listWorktrees,
+  mergeWorktree,
+  cleanupWorktrees,
+} from './worktree-manager';
+export type {
+  WorktreeInfo,
+  WorktreeCreateOptions,
+  WorktreeMergeOptions,
+} from './worktree-manager';
