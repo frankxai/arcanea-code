@@ -75,12 +75,20 @@ const ROUTING_RULES: RoutingRule[] = [
   },
 
   // --- Sonnet-tier: implementation / content ---
+  // Review and refactor BEFORE build (more specific patterns first)
   {
-    pattern: /\b(implement|build|create|develop|code|program|function|component)\b/,
+    pattern: /\b(review|pr|pull.?request|code.?review|audit)\b/,
     domain: 'code',
-    guardian: 'lyssandria',
+    guardian: 'alera',
     suggestedModel: 'sonnet',
-    description: 'Code implementation — Lyssandria ensures solid foundations.',
+    description: 'Code review — Alera speaks truth through the Voice Gate.',
+  },
+  {
+    pattern: /\b(implement|build|create|develop|program|function|component|feature)\b/,
+    domain: 'code',
+    guardian: 'draconia',
+    suggestedModel: 'sonnet',
+    description: 'Code implementation — Draconia transforms ideas into reality through Fire.',
   },
   {
     pattern: /\b(refactor|migrate|rewrite|modernize|upgrade)\b/,
@@ -111,18 +119,18 @@ const ROUTING_RULES: RoutingRule[] = [
     description: 'Music creation — Alera gives voice to the frequencies.',
   },
   {
-    pattern: /\b(publish|release|npm|package|deploy|ship|changelog)\b/,
+    pattern: /\b(publish|release|npm|package|ship|changelog)\b/,
     domain: 'publishing',
-    guardian: 'alera',
+    guardian: 'shinkami',
     suggestedModel: 'sonnet',
-    description: 'Publishing and distribution — Alera speaks truth outward.',
+    description: 'Publishing and distribution — Shinkami orchestrates the release.',
   },
   {
-    pattern: /\b(review|pr|pull.?request|code.?review|audit)\b/,
+    pattern: /\b(deploy|ci|cd|pipeline|production|staging)\b/,
     domain: 'code',
     guardian: 'draconia',
     suggestedModel: 'sonnet',
-    description: 'Code review — Draconia burns away impurities.',
+    description: 'Deployment — Draconia fires the release into the world.',
   },
   {
     pattern: /\b(teach|tutorial|academy|lesson|learn|guide|course)\b/,
@@ -148,11 +156,11 @@ const ROUTING_RULES: RoutingRule[] = [
 
   // --- Haiku-tier: quick / mechanical ---
   {
-    pattern: /\b(lint|format|prettier|eslint|sort.?import)\b/,
+    pattern: /\b(lint|format|prettier|eslint|sort.?import|spell)\b/,
     domain: 'code',
-    guardian: 'lyssandria',
+    guardian: 'alera',
     suggestedModel: 'haiku',
-    description: 'Formatting and linting — quick mechanical task.',
+    description: 'Formatting and linting — Alera enforces clean expression.',
   },
   {
     pattern: /\b(status|check|list|show|what.?is|where.?is)\b/,

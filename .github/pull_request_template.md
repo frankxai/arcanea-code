@@ -2,20 +2,40 @@
 
 Closes #
 
+### Guardian Domain
+
+<!-- Which Guardian's domain does this change affect? -->
+- [ ] Lyssandria (Earth) — Architecture, infrastructure
+- [ ] Leyla (Water) — Design, UI/UX
+- [ ] Draconia (Fire) — Implementation, performance
+- [ ] Maylinn (Heart) — Content, documentation
+- [ ] Alera (Voice) — APIs, naming, tests
+- [ ] Other / Multiple domains
+
 ### Type of change
 
 - [ ] Bug fix
 - [ ] New feature
+- [ ] Agent / Skill / Command
 - [ ] Refactor / code improvement
 - [ ] Documentation
 
 ### What does this PR do?
 
-Please provide a description of the issue, the changes you made to fix it, and why they work. It is expected that you understand why your changes work and if you do not understand why at least say as much so a maintainer knows how much to value the PR.
-
-**If you paste a large clearly AI generated description here your PR may be IGNORED or CLOSED!**
+<!-- Brief description of the changes and why they work. -->
 
 ### How did you verify your code works?
+
+- [ ] Typecheck passes (`bun typecheck`)
+- [ ] Tests pass (`bun test`)
+- [ ] Manual testing done
+
+### Upstream Compatibility
+
+- [ ] Changes only in `.arcanea/` — no upstream impact
+- [ ] Changes in `packages/opencode/src/arcanea/` — no upstream impact
+- [ ] Minimal upstream file changes (branding only)
+- [ ] Significant upstream changes — document below
 
 ### Screenshots / recordings
 
@@ -25,5 +45,3 @@ _If this is a UI change, please include a screenshot or recording._
 
 - [ ] I have tested my changes locally
 - [ ] I have not included unrelated changes in this PR
-
-_If you do not follow this template your PR will be automatically rejected._
