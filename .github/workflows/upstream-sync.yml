@@ -1,0 +1,47 @@
+name: Upstream Sync Check
+on:
+  schedule:
+    - cron: '0 6 * * 1'  # Every Monday 6am UTC
+  workflow_dispatch:
+
+jobs:
+  check-upstream:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Add upstream
+        run: git remote add upstream https://github.com/anomalyco/opencode.git
+      - name: Fetch upstream
+        run: git fetch upstream dev
+      - name: Check divergence
+        run: |
+          BEHIND=$(git rev-list --count HEAD..upstream/dev)
+          echo "commits_behind=$BEHIND" >> $GITHUB_OUTPUT
+          echo "Arcanea Code is $BEHIND commits behind upstream opencode"
+          if [ "$BEHIND" -gt 50 ]; then
+            echo "::warning::Significant upstream drift detected: $BEHIND commits behind"
+          fi
+        id: check
+      - name: Create sync issue if needed
+        if: steps.check.outputs.commits_behind > 100
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const behind = ${{ steps.check.outputs.commits_behind }};
+            const issues = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: 'upstream-sync',
+              state: 'open'
+            });
+            if (issues.data.length === 0) {
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: `Upstream sync needed: ${behind} commits behind`,
+                body: `Automated check detected ${behind} commits behind anomalyco/opencode.\n\nRun the sync script:\n\`\`\`bash\nscripts/sync-upstream.sh\n\`\`\``,
+                labels: ['upstream-sync', 'priority:high']
+              });
+            }
