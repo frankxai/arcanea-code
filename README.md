@@ -1,141 +1,171 @@
-<p align="center">
-  <a href="https://opencode.ai">
-    <picture>
-      <source srcset="packages/console/app/src/asset/logo-ornate-dark.svg" media="(prefers-color-scheme: dark)">
-      <source srcset="packages/console/app/src/asset/logo-ornate-light.svg" media="(prefers-color-scheme: light)">
-      <img src="packages/console/app/src/asset/logo-ornate-light.svg" alt="OpenCode logo">
-    </picture>
-  </a>
-</p>
-<p align="center">The open source AI coding agent.</p>
-<p align="center">
-  <a href="https://opencode.ai/discord"><img alt="Discord" src="https://img.shields.io/discord/1391832426048651334?style=flat-square&label=discord" /></a>
-  <a href="https://www.npmjs.com/package/opencode-ai"><img alt="npm" src="https://img.shields.io/npm/v/opencode-ai?style=flat-square" /></a>
-  <a href="https://github.com/anomalyco/opencode/actions/workflows/publish.yml"><img alt="Build status" src="https://img.shields.io/github/actions/workflow/status/anomalyco/opencode/publish.yml?style=flat-square&branch=dev" /></a>
-</p>
+<div align="center">
 
-<p align="center">
-  <a href="README.md">English</a> |
-  <a href="README.zh.md">简体中文</a> |
-  <a href="README.zht.md">繁體中文</a> |
-  <a href="README.ko.md">한국어</a> |
-  <a href="README.de.md">Deutsch</a> |
-  <a href="README.es.md">Español</a> |
-  <a href="README.fr.md">Français</a> |
-  <a href="README.it.md">Italiano</a> |
-  <a href="README.da.md">Dansk</a> |
-  <a href="README.ja.md">日本語</a> |
-  <a href="README.pl.md">Polski</a> |
-  <a href="README.ru.md">Русский</a> |
-  <a href="README.bs.md">Bosanski</a> |
-  <a href="README.ar.md">العربية</a> |
-  <a href="README.no.md">Norsk</a> |
-  <a href="README.br.md">Português (Brasil)</a> |
-  <a href="README.th.md">ไทย</a> |
-  <a href="README.tr.md">Türkçe</a> |
-  <a href="README.uk.md">Українська</a> |
-  <a href="README.bn.md">বাংলা</a> |
-  <a href="README.gr.md">Ελληνικά</a> |
-  <a href="README.vi.md">Tiếng Việt</a>
-</p>
+# Arcanea Code
 
-[![OpenCode Terminal UI](packages/web/src/assets/lander/screenshot.png)](https://opencode.ai)
+### Guardian-Powered AI Coding CLI
+
+**Living Intelligence in your terminal. Build your universe, one commit at a time.**
+
+[![MIT](https://img.shields.io/badge/MIT-0d1117?style=for-the-badge)](./LICENSE)
+[![TypeScript](https://img.shields.io/badge/TypeScript-0d1117?style=for-the-badge&logo=typescript&logoColor=3178C6)](https://www.typescriptlang.org/)
+[![arcanea.ai](https://img.shields.io/badge/arcanea.ai-live-0d1117?style=for-the-badge&labelColor=0d1117&color=7fffd4)](https://arcanea.ai)
+[![Built on OpenCode](https://img.shields.io/badge/Built_on-OpenCode-0d1117?style=for-the-badge&labelColor=0d1117&color=78a6ff)](https://github.com/anomalyco/opencode)
+
+**Built on [OpenCode](https://github.com/anomalyco/opencode)** — the open source AI coding agent with 127K+ stars.
+
+</div>
 
 ---
 
-### Installation
+## What Is Arcanea Code?
 
-```bash
-# YOLO
-curl -fsSL https://opencode.ai/install | bash
+Arcanea Code is a **Guardian-powered AI coding CLI** that brings Living Intelligence to your terminal. It is a full fork of OpenCode enhanced with the Arcanea intelligence layer — ten specialized Guardian agents that route every task to the right intelligence at the right moment.
 
-# Package managers
-npm i -g opencode-ai@latest        # or bun/pnpm/yarn
-scoop install opencode             # Windows
-choco install opencode             # Windows
-brew install anomalyco/tap/opencode # macOS and Linux (recommended, always up to date)
-brew install opencode              # macOS and Linux (official brew formula, updated less)
-sudo pacman -S opencode            # Arch Linux (Stable)
-paru -S opencode-bin               # Arch Linux (Latest from AUR)
-mise use -g opencode               # Any OS
-nix run nixpkgs#opencode           # or github:anomalyco/opencode for latest dev branch
-```
+This is not a wrapper. It is a permanent intelligence layer that compounds context over time, learns from your patterns, and enforces a consistent creative and technical voice across every session.
 
-> [!TIP]
-> Remove versions older than 0.1.x before installing.
-
-### Desktop App (BETA)
-
-OpenCode is also available as a desktop application. Download directly from the [releases page](https://github.com/anomalyco/opencode/releases) or [opencode.ai/download](https://opencode.ai/download).
-
-| Platform              | Download                              |
-| --------------------- | ------------------------------------- |
-| macOS (Apple Silicon) | `opencode-desktop-darwin-aarch64.dmg` |
-| macOS (Intel)         | `opencode-desktop-darwin-x64.dmg`     |
-| Windows               | `opencode-desktop-windows-x64.exe`    |
-| Linux                 | `.deb`, `.rpm`, or AppImage           |
-
-```bash
-# macOS (Homebrew)
-brew install --cask opencode-desktop
-# Windows (Scoop)
-scoop bucket add extras; scoop install extras/opencode-desktop
-```
-
-#### Installation Directory
-
-The install script respects the following priority order for the installation path:
-
-1. `$OPENCODE_INSTALL_DIR` - Custom installation directory
-2. `$XDG_BIN_DIR` - XDG Base Directory Specification compliant path
-3. `$HOME/bin` - Standard user binary directory (if it exists or can be created)
-4. `$HOME/.opencode/bin` - Default fallback
-
-```bash
-# Examples
-OPENCODE_INSTALL_DIR=/usr/local/bin curl -fsSL https://opencode.ai/install | bash
-XDG_BIN_DIR=$HOME/.local/bin curl -fsSL https://opencode.ai/install | bash
-```
-
-### Agents
-
-OpenCode includes two built-in agents you can switch between with the `Tab` key.
-
-- **build** - Default, full-access agent for development work
-- **plan** - Read-only agent for analysis and code exploration
-  - Denies file edits by default
-  - Asks permission before running bash commands
-  - Ideal for exploring unfamiliar codebases or planning changes
-
-Also included is a **general** subagent for complex searches and multistep tasks.
-This is used internally and can be invoked using `@general` in messages.
-
-Learn more about [agents](https://opencode.ai/docs/agents).
-
-### Documentation
-
-For more info on how to configure OpenCode, [**head over to our docs**](https://opencode.ai/docs).
-
-### Contributing
-
-If you're interested in contributing to OpenCode, please read our [contributing docs](./CONTRIBUTING.md) before submitting a pull request.
-
-### Building on OpenCode
-
-If you are working on a project that's related to OpenCode and is using "opencode" as part of its name, for example "opencode-dashboard" or "opencode-mobile", please add a note to your README to clarify that it is not built by the OpenCode team and is not affiliated with us in any way.
-
-### FAQ
-
-#### How is this different from Claude Code?
-
-It's very similar to Claude Code in terms of capability. Here are the key differences:
-
-- 100% open source
-- Not coupled to any provider. Although we recommend the models we provide through [OpenCode Zen](https://opencode.ai/zen), OpenCode can be used with Claude, OpenAI, Google, or even local models. As models evolve, the gaps between them will close and pricing will drop, so being provider-agnostic is important.
-- Out-of-the-box LSP support
-- A focus on TUI. OpenCode is built by neovim users and the creators of [terminal.shop](https://terminal.shop); we are going to push the limits of what's possible in the terminal.
-- A client/server architecture. This, for example, can allow OpenCode to run on your computer while you drive it remotely from a mobile app, meaning that the TUI frontend is just one of the possible clients.
+**The promise:** Every file you touch, every commit you make, every problem you solve — your Guardians are present, each bringing their elemental domain to bear.
 
 ---
 
-**Join our community** [Discord](https://discord.gg/opencode) | [X.com](https://x.com/opencode)
+## Install
+
+```bash
+npm install -g arcanea-code
+```
+
+Or use the one-line installer:
+
+```bash
+curl -fsSL https://arcanea.ai/install | sh
+```
+
+Then launch:
+
+```bash
+arcanea-code
+```
+
+---
+
+## Features
+
+### Ten Guardian Agents
+
+Every task is routed through the Guardian whose element aligns with the work:
+
+| Guardian | Element | Domain |
+|:---------|:--------|:-------|
+| **Lyssandria** | Earth | Architecture, database, infrastructure |
+| **Leyla** | Water | Design, UI/UX, creativity, animation |
+| **Draconia** | Fire | Execution, performance, shipping |
+| **Maylinn** | Heart | Community, content, documentation |
+| **Alera** | Wind | Expression, APIs, naming, publishing |
+| **Lyria** | Void | Vision, strategy, AI/ML, design review |
+| **Aiyami** | Spirit | Wisdom, principles, teaching |
+| **Elara** | Void | Perspective shifts, refactoring |
+| **Ino** | Spirit | Integration, collaboration, cross-platform |
+| **Shinkami** | All | Meta-orchestration, system design |
+
+### 75+ AI Models
+
+Claude, Gemini, GPT-4o, Bedrock, Groq, Mistral, local models — all accessible through the Vercel AI SDK. Switch models per-Guardian or globally.
+
+### Guardian Council
+
+When a task is complex enough, invoke the Council — all five elemental Guardians deliberate in parallel, each analyzing from their domain. Shinkami synthesizes their perspectives into a unified decision.
+
+```bash
+/council "Should we migrate the auth system to JWT with refresh tokens?"
+```
+
+### 35+ Guardian-Aware Skills
+
+Skills activate automatically based on the task at hand. Writing a component? `react-patterns` fires. Touching the database? `supabase-patterns` takes over. The right knowledge arrives without you have to ask.
+
+### Context That Compounds
+
+Unlike stateless chat, Arcanea Code maintains a persistent intelligence layer across sessions. Each Guardian tracks domain-specific context. Your architectural decisions from last month are present in today's code review.
+
+### Swarm Intelligence
+
+Multiple Guardians can work in parallel on different aspects of a complex task. Draconia handles the migration while Leyla designs the new UI — coordinated through Lumina, the meta-orchestrator.
+
+### Git Worktree Isolation
+
+Parallel agent sessions get their own git worktrees — no file conflicts, clean merges, full isolation.
+
+---
+
+## Architecture
+
+```
+Arcanea Code Intelligence Hierarchy
+├── Arcanea (the model — raw AI intelligence)
+├── Lumina (meta-orchestrator — routes to the right Guardian)
+├── Guardians (10 domain swarm coordinators)
+│   ├── Lyssandria → Earth domain → infrastructure agents
+│   ├── Leyla → Water domain → creative agents
+│   ├── Draconia → Fire domain → execution agents
+│   └── ... (7 more)
+└── Luminors (specialist worker agents)
+
+OpenCode Engine (upstream, regularly synced)
+├── AI SDK (75+ models via Vercel AI SDK)
+├── Tool System (file editing, shell, search, LSP)
+├── MCP Client (connects to any MCP server)
+├── Plugin System (TypeScript + oh-my-arcanea)
+└── Client-Server (TUI + HTTP server)
+```
+
+---
+
+## Environment Variables
+
+Arcanea Code supports both `ARCANEA_*` and `OPENCODE_*` prefixes. `ARCANEA_*` takes priority:
+
+```bash
+# Arcanea-native
+export ARCANEA_EXPERIMENTAL=true
+export ARCANEA_PERMISSION=allow-all
+
+# OpenCode-compatible (also works)
+export OPENCODE_EXPERIMENTAL=true
+```
+
+---
+
+## Upstream Sync
+
+Arcanea Code is built on [OpenCode](https://github.com/anomalyco/opencode) (MIT license). We maintain an automated weekly sync check and sustainable rebase workflow to stay current with upstream improvements while preserving Guardian intelligence features.
+
+```bash
+# Check upstream status
+scripts/sync-upstream.sh
+```
+
+---
+
+## Ecosystem
+
+| Package | Description |
+|---------|-------------|
+| [arcanea.ai](https://arcanea.ai) | The full Arcanea universe — chat, worlds, feed, academy |
+| [oh-my-arcanea](https://github.com/frankxai/oh-my-arcanea) | Plugin harness — 11 agents, 44 hooks, 26 tools |
+| [arcanea-flow](https://github.com/frankxai/arcanea-flow) | Multi-agent orchestration for complex builds |
+| [arcanea-vault](https://github.com/frankxai/arcanea-vault) | Export AI conversations from any platform |
+
+---
+
+## License
+
+MIT — same as OpenCode. Build freely.
+
+---
+
+<div align="center">
+
+*"Enter seeking, leave transformed, return whenever needed."*
+
+[arcanea.ai](https://arcanea.ai)
+
+</div>
