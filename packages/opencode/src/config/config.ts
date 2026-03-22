@@ -49,16 +49,16 @@ export namespace Config {
   function systemManagedConfigDir(): string {
     switch (process.platform) {
       case "darwin":
-        return "/Library/Application Support/opencode"
+        return "/Library/Application Support/arcanea-code"
       case "win32":
-        return path.join(process.env.ProgramData || "C:\\ProgramData", "opencode")
+        return path.join(process.env.ProgramData || "C:\\ProgramData", "arcanea-code")
       default:
-        return "/etc/opencode"
+        return "/etc/arcanea-code"
     }
   }
 
   export function managedConfigDir() {
-    return process.env.OPENCODE_TEST_MANAGED_CONFIG_DIR || systemManagedConfigDir()
+    return process.env.ARCANEA_TEST_MANAGED_CONFIG_DIR || process.env.OPENCODE_TEST_MANAGED_CONFIG_DIR || systemManagedConfigDir()
   }
 
   const managedDir = managedConfigDir()
@@ -122,7 +122,11 @@ export namespace Config {
 
     // Project config overrides global and remote config.
     if (!Flag.OPENCODE_DISABLE_PROJECT_CONFIG) {
-      for (const file of await ConfigPaths.projectFiles("opencode", Instance.directory, Instance.worktree)) {
+      // Support both arcanea and opencode config file names
+      for (const file of [
+        ...await ConfigPaths.projectFiles("arcanea", Instance.directory, Instance.worktree),
+        ...await ConfigPaths.projectFiles("opencode", Instance.directory, Instance.worktree),
+      ]) {
         result = mergeConfigConcatArrays(result, await loadFile(file))
       }
     }
@@ -141,8 +145,8 @@ export namespace Config {
     const deps = []
 
     for (const dir of unique(directories)) {
-      if (dir.endsWith(".opencode") || dir === Flag.OPENCODE_CONFIG_DIR) {
-        for (const file of ["opencode.jsonc", "opencode.json"]) {
+      if (dir.endsWith(".arcanea") || dir.endsWith(".opencode") || dir === Flag.OPENCODE_CONFIG_DIR) {
+        for (const file of ["arcanea.jsonc", "arcanea.json", "opencode.jsonc", "opencode.json"]) {
           log.debug(`loading config from ${path.join(dir, file)}`)
           result = mergeConfigConcatArrays(result, await loadFile(path.join(dir, file)))
           // to satisfy the type checker
@@ -208,7 +212,7 @@ export namespace Config {
     // which would fail on system directories requiring elevated permissions
     // This way it only loads config file and not skills/plugins/commands
     if (existsSync(managedDir)) {
-      for (const file of ["opencode.jsonc", "opencode.json"]) {
+      for (const file of ["arcanea.jsonc", "arcanea.json", "opencode.jsonc", "opencode.json"]) {
         result = mergeConfigConcatArrays(result, await loadFile(path.join(managedDir, file)))
       }
     }
@@ -400,7 +404,7 @@ export namespace Config {
       })
       if (!md) continue
 
-      const patterns = ["/.opencode/command/", "/.opencode/commands/", "/command/", "/commands/"]
+      const patterns = ["/.arcanea/command/", "/.arcanea/commands/", "/.opencode/command/", "/.opencode/commands/", "/command/", "/commands/"]
       const file = rel(item, patterns) ?? path.basename(item)
       const name = trim(file)
 
@@ -439,7 +443,7 @@ export namespace Config {
       })
       if (!md) continue
 
-      const patterns = ["/.opencode/agent/", "/.opencode/agents/", "/agent/", "/agents/"]
+      const patterns = ["/.arcanea/agent/", "/.arcanea/agents/", "/.opencode/agent/", "/.opencode/agents/", "/agent/", "/agents/"]
       const file = rel(item, patterns) ?? path.basename(item)
       const agentName = trim(file)
 
