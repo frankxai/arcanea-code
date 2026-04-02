@@ -34,7 +34,16 @@
     }
   },
 
-  "mcp": {},
+  "mcp": {
+    "starlight_sis": {
+      "type": "local",
+      "command": ["node", "C:/Users/frank/Arcanea/scripts/sis-mcp-server.mjs"],
+      "enabled": true,
+      "environment": {
+        "STARLIGHT_HOME": "C:/Users/frank/.starlight"
+      }
+    }
+  },
 
   "tools": {
     "github-triage": false,
@@ -45,6 +54,8 @@
     "You are Arcanea Code — a Guardian-powered AI coding CLI.",
     "The Ten Guardians route each task to the right intelligence.",
     "When making decisions, consider which Guardian's domain applies.",
-    "Always aim for quality that would honor the Source Gate."
+    "Always aim for quality that would honor the Source Gate.",
+    "Canonical SIS memory lives at C:/Users/frank/.starlight.",
+    "Use starlight_sis resources and tools before assuming there is no prior context."
   ]
 }
